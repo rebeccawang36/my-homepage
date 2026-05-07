@@ -1,0 +1,449 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-dark: #1e3a5f;
+  --primary-light: #2d5a87;
+  --accent: #4a90d9;
+  --bg-light: #f8fafc;
+  --bg-white: #ffffff;
+  --text-dark: #1a1a2e;
+  --text-muted: #64748b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, var(--bg-light) 0%, #e8f4f8 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* 头部区域 */
+.header {
+  text-align: center;
+  padding: 4rem 1rem 3.5rem;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+  border-radius: 1rem;
+  color: white;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.2);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, 20px); }
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+  padding: 0 2rem;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #6ba3ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 12px 40px rgba(74, 144, 217, 0.5);
+  border: 5px solid rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+.avatar span {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-wrapper {
+  position: relative;
+}
+
+.avatar-upload-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+  border: 3px solid white;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-upload-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.4);
+}
+
+.avatar-upload-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.upload-loading {
+  font-size: 0.625rem;
+}
+
+.profile-info h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
+}
+
+.profile-info .tagline {
+  font-size: 1.25rem;
+  opacity: 0.95;
+  max-width: 600px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* 主内容区 */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 卡片通用样式 */
+.card {
+  background: var(--bg-white);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.08);
+  border: 1px solid rgba(30, 58, 95, 0.08);
+}
+
+.card-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(74, 144, 217, 0.2);
+}
+
+.chat-section .card-title {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.card-title::before {
+  content: '';
+  width: 4px;
+  height: 1.25rem;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--primary-light) 100%);
+  border-radius: 2px;
+}
+
+/* 关于我区域 */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.info-label {
+  font-weight: 500;
+  color: var(--primary-dark);
+  min-width: 80px;
+}
+
+.info-value {
+  color: var(--text-muted);
+}
+
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+.highlight {
+  background: linear-gradient(135deg, rgba(74, 144, 217, 0.1) 0%, rgba(45, 90, 135, 0.1) 100%);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-top: 0.5rem;
+}
+
+/* 聊天区域 */
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+  position: relative;
+  z-index: 10;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  background: var(--bg-light);
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.message {
+  max-width: 85%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+  color: white;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid rgba(30, 58, 95, 0.1);
+  border-bottom-left-radius: 0.25rem;
+}
+
+.message.typing {
+  display: flex;
+  gap: 0.25rem;
+  padding: 1rem;
+}
+
+.message.typing span {
+  width: 8px;
+  height: 8px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.message.typing span:nth-child(1) { animation-delay: 0s; }
+.message.typing span:nth-child(2) { animation-delay: 0.2s; }
+.message.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+}
+
+/* 聊天输入 */
+.chat-input-container {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(74, 144, 217, 0.2);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s ease;
+  background: var(--bg-white);
+  box-shadow: inset 0 2px 4px rgba(30, 58, 95, 0.05);
+}
+
+.chat-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.1);
+}
+
+.send-btn {
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(74, 144, 217, 0.4);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+}
+
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 页脚 */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.footer p {
+  margin-bottom: 0.75rem;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--primary-dark);
+  color: #fff;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3);
+}
+
+.contact-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.4);
+}
+
+/* 滚动条样式 */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(30, 58, 95, 0.2);
+  border-radius: 3px;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+  .header {
+    padding: 2rem 1rem;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+  
+  .profile-info h1 {
+    font-size: 1.5rem;
+  }
+  
+  .profile-info .tagline {
+    font-size: 1rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+  }
+  
+  .chat-section {
+    height: 350px;
+  }
+}
